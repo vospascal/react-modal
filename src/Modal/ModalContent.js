@@ -30,8 +30,9 @@ const Button = styled("button")`
 `;
 const Modal = styled("div")`
   position: relative;
-  left: 50%;
-  top: 50%;
+  right: 0;
+  box-sizing:content-box;
+  top: 0;
   font-family: "zona-regular";
   font-size: 15px;
   font-weight: normal;
@@ -45,20 +46,20 @@ const Modal = styled("div")`
   background-color: #ffffff;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  transform: translate(-50%, -50%);
-  ${({ width }) => (width ? `max-width:${width};` : "max-width:400px;")}
-  max-height: calc(100% - 1em);
+  /* ${({ width }) => (width ? `max-width:${width};` : "max-width:400px;")} */
+  max-height: 100%;
+  height:100%;
   border-radius: 5px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-
-  @media screen and (min-width: 500px) {
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    ${({ width }) => (width ? `max-width:${width};` : "max-width:400px;")}
-    max-height: calc(100% - 1em);
-    border-radius: 5px;
-  }
+ 
+  @media screen and (min-width: 600px) { 
+     right: 0;
+     top: 0;
+     ${({ width }) => (width ? `max-width:${width};` : "max-width:600px;")} 
+     max-height: 100%;
+      height:100%;
+     border-radius: 5px; 
+   }
 `;
 
 const ModalBody = styled("div")`
@@ -116,7 +117,7 @@ const ModalContent = ({
           {content}
           <ButtonBottomContainer>
             <hr />
-            <button name="Sluiten" onClick={onClose} />
+            <button onClick={onClose}>Sluiten</button>
           </ButtonBottomContainer>
         </ModalBody>
       </Modal>
