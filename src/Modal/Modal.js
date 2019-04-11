@@ -63,6 +63,7 @@ class Modal extends Component {
         />
         {isOpen && (
           <ModalContent
+            isOpen={isOpen}
             ariaLabel={ariaLabel}
             buttonRef={n => {
               this.closeButtonNode = n;

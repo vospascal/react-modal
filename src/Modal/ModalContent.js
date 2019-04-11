@@ -29,7 +29,7 @@ const Button = styled("button")`
   cursor: pointer;
 `;
 const Modal = styled("div")`
-  position: relative;
+  position: absolute;
   right: 0;
   box-sizing:content-box;
   top: 0;
@@ -51,7 +51,15 @@ const Modal = styled("div")`
   height:100%;
   border-radius: 5px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
- 
+
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+
+
+
   @media screen and (min-width: 600px) { 
      right: 0;
      top: 0;
@@ -60,6 +68,16 @@ const Modal = styled("div")`
       height:100%;
      border-radius: 5px; 
    }
+
+  &.modal-open {
+    transform: translateX(0%);
+    -webkit-transform: translateX(0%);
+  }
+
+  &.modal-closed {
+    transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+  }
 `;
 
 const ModalBody = styled("div")`
@@ -88,6 +106,7 @@ const ModalCover = styled("div")`
   transform: translateZ(0);
   background-color: rgba(#000, 0.15);
   background: rgba(0, 0, 0, 0.4);
+  transition: all 2.5s ease;
 `;
 
 const ModalContent = ({
@@ -95,6 +114,7 @@ const ModalContent = ({
   buttonRef,
   content,
   modalRef,
+  isOpen,
   onClose,
   role = "dialog",
   optional
@@ -106,7 +126,12 @@ const ModalContent = ({
           ${modalContentStyle}
         `}
       />
-      <Modal ref={modalRef} width={optional.width} data-role={role}>
+      <Modal
+        className={isOpen ? "modal-open" : "modal-closed"}
+        ref={modalRef}
+        width={optional.width}
+        data-role={role}
+      >
         <Button aria-labelledby="close-modal" onClick={onClose} ref={buttonRef}>
           <HiddenText id="close-modal" className="u-hide-visually">
             Close Modal
