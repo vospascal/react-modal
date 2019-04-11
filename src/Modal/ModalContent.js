@@ -49,7 +49,6 @@ const Modal = styled("div")`
   /* ${({ width }) => (width ? `max-width:${width};` : "max-width:400px;")} */
   max-height: 100%;
   height:100%;
-  border-radius: 5px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
 
   display: flex;
@@ -66,7 +65,6 @@ const Modal = styled("div")`
      ${({ width }) => (width ? `max-width:${width};` : "max-width:600px;")} 
      max-height: 100%;
       height:100%;
-     border-radius: 5px; 
    }
 
   &.modal-open {
@@ -96,6 +94,8 @@ const HiddenText = styled("div")`
   white-space: nowrap !important;
 `;
 const HeaderButton = styled("div")`
+  top: 0;
+  right: 0;
   position: sticky;
 `;
 

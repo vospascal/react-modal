@@ -3,6 +3,14 @@ import PropTypes from "prop-types";
 import ModalTrigger from "./ModalTrigger";
 import ModalContent from "./ModalContent";
 
+export const ModalTitelSlot = ({ children }) => {
+  return <div key="titel">{children}</div>;
+};
+
+export const ModalContentSlot = ({ children }) => {
+  return <div key="content">{children}</div>;
+};
+
 class Modal extends Component {
   state = { isOpen: false };
 
