@@ -8,7 +8,7 @@ function App() {
     <div className="App">
       <h1>Hello CodeSandbox</h1>
       <Modal>
-        <h2>Titel blablaa</h2>
+        <h2>Titel Lalaland</h2>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ex velit,
           posuere tincidunt arcu et, ultrices blandit quam. Nam gravida ex nec
