@@ -31,7 +31,7 @@ const Button = styled("button")`
 const Modal = styled("div")`
   position: absolute;
   right: 0;
-  box-sizing:content-box;
+  box-sizing: border-box;
   top: 0;
   font-family: "zona-regular";
   font-size: 15px;
