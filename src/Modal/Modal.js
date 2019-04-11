@@ -3,14 +3,6 @@ import PropTypes from "prop-types";
 import ModalTrigger from "./ModalTrigger";
 import ModalContent from "./ModalContent";
 
-export const ModalTitelSlot = ({ children }) => {
-  return <div key="titel">{children}</div>;
-};
-
-export const ModalContentSlot = ({ children }) => {
-  return <div key="content">{children}</div>;
-};
-
 class Modal extends Component {
   state = { isOpen: false };
 
@@ -50,7 +42,15 @@ class Modal extends Component {
 
   render() {
     const { isOpen } = this.state;
-    const { ariaLabel, children, role, width, closeOnCover } = this.props;
+    const {
+      ariaLabel,
+      children,
+      role,
+      width,
+      closeOnCover,
+      ModalTitelSlot,
+      ModalContentSlot
+    } = this.props;
 
     const optional = {};
 
@@ -79,7 +79,8 @@ class Modal extends Component {
             modalRef={n => {
               this.modalNode = n;
             }}
-            content={children}
+            ModalTitelSlot={ModalTitelSlot}
+            ModalContentSlot={ModalContentSlot}
             onClose={this.onClose}
             role={role}
             optional={optional}

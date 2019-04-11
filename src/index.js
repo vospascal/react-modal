@@ -1,17 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import Modal, { ModalTitelSlot, ModalContentSlot } from "./Modal/Modal";
+import Modal from "./Modal/Modal";
 
 function App() {
   return (
     <div className="App">
       <h1>Hello CodeSandbox</h1>
-      <Modal>
-        <ModalTitelSlot>
-          <h2>Titel Lalaland</h2>
-        </ModalTitelSlot>
-        <ModalContentSlot>
+      <Modal
+        ModalTitelSlot={<strong>Titel Lalaland</strong>}
+        ModalContentSlot={
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ex
             velit, posuere tincidunt arcu et, ultrices blandit quam. Nam gravida
@@ -49,8 +47,8 @@ function App() {
             luctus. In hac habitasse platea dictumst. Nam feugiat augue ac massa
             rutrum, a congue elit vestibulum.
           </p>
-        </ModalContentSlot>
-      </Modal>
+        }
+      />
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ex velit,
         posuere tincidunt arcu et, ultrices blandit quam. Nam gravida ex nec

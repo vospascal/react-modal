@@ -13,12 +13,14 @@ const modalContentStyle = css(`
 `);
 
 const ButtonBottomContainer = styled("div")`
-  display: block;
+  bottom: 0;
+  position: sticky;
   text-align: center;
+  background: #fff;
 `;
 
 const Button = styled("button")`
-  position: relative;
+  position: absolute;
   top: 0;
   right: 0;
   padding: 0.5em;
@@ -42,7 +44,6 @@ const Modal = styled("div")`
   letter-spacing: normal;
   color: #004078;
   height: auto;
-  padding: 15px;
   background-color: #ffffff;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
@@ -97,6 +98,8 @@ const HeaderButton = styled("div")`
   top: 0;
   right: 0;
   position: sticky;
+  padding: 5px 15px;
+  background: #fff;
 `;
 
 const ModalCover = styled("div")`
@@ -119,6 +122,8 @@ const ModalContent = ({
   content,
   modalRef,
   isOpen,
+  ModalContentSlot,
+  ModalTitelSlot,
   onClose,
   role = "dialog",
   optional
@@ -132,6 +137,13 @@ const ModalContent = ({
       />
       <Modal ref={modalRef} width={optional.width} data-role={role}>
         <HeaderButton>
+          <div
+            style={{
+              display: "inline-block"
+            }}
+          >
+            {ModalTitelSlot}
+          </div>
           <Button
             aria-labelledby="close-modal"
             onClick={onClose}
@@ -144,7 +156,8 @@ const ModalContent = ({
           </Button>
         </HeaderButton>
         <ModalBody>
-          {content}
+          <div style={{ padding: "5px 15px" }}>{ModalContentSlot}</div>
+
           <ButtonBottomContainer>
             <hr />
             <button onClick={onClose}>Sluiten</button>
