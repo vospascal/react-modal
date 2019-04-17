@@ -17,6 +17,10 @@ const ButtonBottomContainer = styled("div")`
   position: sticky;
   text-align: center;
   background: #fff;
+  padding: 5px;
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.35);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.35);
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.35);
 `;
 
 const Button = styled("button")`
@@ -31,56 +35,72 @@ const Button = styled("button")`
   cursor: pointer;
 `;
 const Modal = styled("div")`
-  position: absolute;
-  right: 0;
+  position: fixed;
   box-sizing: border-box;
   top: 0;
+  right: 0;
   font-family: "zona-regular";
   font-size: 15px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
   line-height: 1.73;
   letter-spacing: normal;
   color: #004078;
   height: auto;
   background-color: #ffffff;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  /* ${({ width }) => (width ? `max-width:${width};` : "max-width:400px;")} */
-  max-height: 100%;
-  height:100%;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
 
+  -webkit-overflow-scrolling: touch;
+  max-height: 100%;
+  height: 100%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
 
+  overflow-y: hidden;
 
-
-  @media screen and (min-width: 600px) { 
-     right: 0;
-     top: 0;
-     ${({ width }) => (width ? `max-width:${width};` : "max-width:600px;")} 
-     max-height: 100%;
-      height:100%;
-   }
-
-  &.modal-open {
-    transform: translateX(0%);
-    -webkit-transform: translateX(0%);
+  @media screen and (min-width: 600px) {
+    ${({ width }) => (width ? `max-width:${width};` : "max-width:600px;")}
+    max-height: 100%;
+    height: 100%;
   }
 
-  &.modal-closed {
-    transform: translateX(100%);
-    -webkit-transform: translateX(100%);
+  &.modal-open {
+    animation: open 0.5s;
+  }
+
+  @keyframes open {
+    from {
+      right: -600px;
+    }
+    to {
+      right: 0;
+    }
   }
 `;
 
 const ModalBody = styled("div")`
   padding-top: 0.25em;
+  overflow: auto;
+  /* width */
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
 `;
 
 const HiddenText = styled("div")`
@@ -100,20 +120,21 @@ const HeaderButton = styled("div")`
   position: sticky;
   padding: 5px 15px;
   background: #fff;
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.35);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.35);
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.35);
 `;
 
 const ModalCover = styled("div")`
   box-sizing: border-box;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: 9999; // This must be at a higher index to the rest of your page content
-  transform: translateZ(0);
   background-color: rgba(#000, 0.15);
   background: rgba(0, 0, 0, 0.4);
-  transition: all 2.5s ease;
 `;
 
 const ModalContent = ({
@@ -135,7 +156,12 @@ const ModalContent = ({
           ${modalContentStyle}
         `}
       />
-      <Modal ref={modalRef} width={optional.width} data-role={role}>
+      <Modal
+        ref={modalRef}
+        width={optional.width}
+        data-role={role}
+        className={isOpen ? "modal-open" : "modal-closed"}
+      >
         <HeaderButton>
           <div
             style={{
@@ -157,12 +183,10 @@ const ModalContent = ({
         </HeaderButton>
         <ModalBody>
           <div style={{ padding: "5px 15px" }}>{ModalContentSlot}</div>
-
-          <ButtonBottomContainer>
-            <hr />
-            <button onClick={onClose}>Sluiten</button>
-          </ButtonBottomContainer>
         </ModalBody>
+        <ButtonBottomContainer>
+          <button onClick={onClose}>Sluiten</button>
+        </ButtonBottomContainer>
       </Modal>
     </ModalCover>,
     document.body
