@@ -63,18 +63,18 @@ const Modal = styled("div")`
     ${({ width }) => (width ? `max-width:${width};` : "max-width:600px;")}
     max-height: 100%;
     height: 100%;
-  }
 
-  &.modal-open {
-    animation: open 0.5s;
-  }
-
-  @keyframes open {
-    from {
-      right: -600px;
+    &.modal-open {
+      animation: open 0.5s;
     }
-    to {
-      right: 0;
+
+    @keyframes open {
+      from {
+        right: -600px;
+      }
+      to {
+        right: 0;
+      }
     }
   }
 `;
